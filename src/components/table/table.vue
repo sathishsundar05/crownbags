@@ -7,227 +7,27 @@
               <tr>
                 <th
                   class="px-5 py-5  bg-gray-100 text-left text-sm font-bold text-secondary uppercase tracking-wider"
+                  v-for="header, index in tableHeader"
+                  :key="index"
                 >
-                  Company name
-                </th>
-                <th
-                  class="px-5 py-5  bg-gray-100 text-left text-sm font-bold text-secondary uppercase tracking-wider"
-                >
-                  Rol
-                </th>
-                <th
-                  class="px-5 py-5  bg-gray-100 text-left text-sm font-bold text-secondary uppercase tracking-wider"
-                >
-                  Created at
-                </th>
-                <th
-                  class="px-5 py-5  bg-gray-100 text-left text-sm font-bold text-secondary uppercase tracking-wider"
-                >
-                  Status
+                  {{ header }}
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr class="border-b border-secondary border-opacity-20">
-                <td class="px-5 py-5   bg-white text-sm">
-                  <div class="flex items-center">
+              <tr class="border-b border-secondary border-opacity-20" v-for="data, tableIndex in tableData" :key="tableIndex">
+                <td class="px-5 py-5 bg-white text-sm" v-for="columnValue, columnKey, colIndex in data" :key="colIndex">
+                  <div v-if="columnKey === 'customer_id'" class="flex space-x-2">
+                    <editIcon @click="onEdit(data)" />
+                    <deleteIcon @click="onDelete(data)" />
+                  </div>
+                  <div class="flex items-center" v-else>
                     <div class="ml-3">
                       <p class="text-secondary whitespace-no-wrap">
-                        Vera Carpenter
+                        {{ columnValue }}
                       </p>
                     </div>
                   </div>
-                </td>
-                <td class="px-5 py-5   bg-white text-sm">
-                  <p class="text-secondary whitespace-no-wrap">Admin</p>
-                </td>
-                <td class="px-5 py-5   bg-white text-sm">
-                  <p class="text-secondary whitespace-no-wrap">Jan 21, 2020</p>
-                </td>
-                <td class="px-5 py-5   bg-white text-sm text-secondary">
-                    Activo
-                </td>
-              </tr>
-              <tr class="border-b border-secondary border-opacity-20">
-                <td class="px-5 py-5   bg-white text-sm">
-                  <div class="flex items-center">
-                    <div class="ml-3">
-                      <p class="text-secondary whitespace-no-wrap">
-                        Blake Bowman
-                      </p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-5 py-5   bg-white text-sm">
-                  <p class="text-secondary whitespace-no-wrap">Editor</p>
-                </td>
-                <td class="px-5 py-5   bg-white text-sm">
-                  <p class="text-secondary whitespace-no-wrap">Jan 01, 2020</p>
-                </td>
-                <td class="px-5 py-5   bg-white text-sm text-secondary">
-                    Activo
-                </td>
-              </tr>
-              <tr class="border-b border-secondary border-opacity-20">
-                <td class="px-5 py-5   bg-white text-sm">
-                  <div class="flex items-center">
-                    <div class="ml-3">
-                      <p class="text-secondary whitespace-no-wrap">Dana Moore</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-5 py-5   bg-white text-sm">
-                  <p class="text-secondary whitespace-no-wrap">Editor</p>
-                </td>
-                <td class="px-5 py-5   bg-white text-sm">
-                  <p class="text-secondary whitespace-no-wrap">Jan 10, 2020</p>
-                </td>
-                <td class="px-5 py-5   bg-white text-sm text-secondary">
-                    Activo
-                </td>
-              </tr>
-              <tr class="border-b border-secondary border-opacity-20">
-                <td class="px-5 py-5 bg-white text-sm">
-                  <div class="flex items-center">
-                    <div class="ml-3">
-                      <p class="text-secondary whitespace-no-wrap">Alonzo Cox</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-5 py-5 bg-white text-sm">
-                  <p class="text-secondary whitespace-no-wrap">Admin</p>
-                </td>
-                <td class="px-5 py-5 bg-white text-sm">
-                  <p class="text-secondary whitespace-no-wrap">Jan 18, 2020</p>
-                </td>
-                <td class="px-5 py-5   bg-white text-sm text-secondary">
-                    Activo
-                </td>
-              </tr>
-              <tr class="border-b border-secondary border-opacity-20">
-                <td class="px-5 py-5 bg-white text-sm">
-                  <div class="flex items-center">
-                    <div class="ml-3">
-                      <p class="text-secondary whitespace-no-wrap">Alonzo Cox</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-5 py-5 bg-white text-sm">
-                  <p class="text-secondary whitespace-no-wrap">Admin</p>
-                </td>
-                <td class="px-5 py-5 bg-white text-sm">
-                  <p class="text-secondary whitespace-no-wrap">Jan 18, 2020</p>
-                </td>
-                <td class="px-5 py-5   bg-white text-sm text-secondary">
-                    Activo
-                </td>
-              </tr>
-              <tr class="border-b border-secondary border-opacity-20">
-                <td class="px-5 py-5 bg-white text-sm">
-                  <div class="flex items-center">
-                    <div class="ml-3">
-                      <p class="text-secondary whitespace-no-wrap">Alonzo Cox</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-5 py-5 bg-white text-sm">
-                  <p class="text-secondary whitespace-no-wrap">Admin</p>
-                </td>
-                <td class="px-5 py-5 bg-white text-sm">
-                  <p class="text-secondary whitespace-no-wrap">Jan 18, 2020</p>
-                </td>
-                <td class="px-5 py-5   bg-white text-sm text-secondary">
-                    Activo
-                </td>
-              </tr>
-              <tr class="border-b border-secondary border-opacity-20">
-                <td class="px-5 py-5 bg-white text-sm">
-                  <div class="flex items-center">
-                    <div class="ml-3">
-                      <p class="text-secondary whitespace-no-wrap">Alonzo Cox</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-5 py-5 bg-white text-sm">
-                  <p class="text-secondary whitespace-no-wrap">Admin</p>
-                </td>
-                <td class="px-5 py-5 bg-white text-sm">
-                  <p class="text-secondary whitespace-no-wrap">Jan 18, 2020</p>
-                </td>
-                <td class="px-5 py-5   bg-white text-sm text-secondary">
-                    Activo
-                </td>
-              </tr>
-              <tr class="border-b border-secondary border-opacity-20">
-                <td class="px-5 py-5 bg-white text-sm">
-                  <div class="flex items-center">
-                    <div class="ml-3">
-                      <p class="text-secondary whitespace-no-wrap">Alonzo Cox</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-5 py-5 bg-white text-sm">
-                  <p class="text-secondary whitespace-no-wrap">Admin</p>
-                </td>
-                <td class="px-5 py-5 bg-white text-sm">
-                  <p class="text-secondary whitespace-no-wrap">Jan 18, 2020</p>
-                </td>
-                <td class="px-5 py-5   bg-white text-sm text-secondary">
-                    Activo
-                </td>
-              </tr>
-              <tr class="border-b border-secondary border-opacity-20">
-                <td class="px-5 py-5 bg-white text-sm">
-                  <div class="flex items-center">
-                    <div class="ml-3">
-                      <p class="text-secondary whitespace-no-wrap">Alonzo Cox</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-5 py-5 bg-white text-sm">
-                  <p class="text-secondary whitespace-no-wrap">Admin</p>
-                </td>
-                <td class="px-5 py-5 bg-white text-sm">
-                  <p class="text-secondary whitespace-no-wrap">Jan 18, 2020</p>
-                </td>
-                <td class="px-5 py-5   bg-white text-sm text-secondary">
-                    Activo
-                </td>
-              </tr>
-              <tr class="border-b border-secondary border-opacity-20">
-                <td class="px-5 py-5 bg-white text-sm">
-                  <div class="flex items-center">
-                    <div class="ml-3">
-                      <p class="text-secondary whitespace-no-wrap">Alonzo Cox</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-5 py-5 bg-white text-sm">
-                  <p class="text-secondary whitespace-no-wrap">Admin</p>
-                </td>
-                <td class="px-5 py-5 bg-white text-sm">
-                  <p class="text-secondary whitespace-no-wrap">Jan 18, 2020</p>
-                </td>
-                <td class="px-5 py-5   bg-white text-sm text-secondary">
-                    Activo
-                </td>
-              </tr>
-              <tr class="border-b border-secondary border-opacity-20">
-                <td class="px-5 py-5 bg-white text-sm">
-                  <div class="flex items-center">
-                    <div class="ml-3">
-                      <p class="text-secondary whitespace-no-wrap">Alonzo Cox</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-5 py-5 bg-white text-sm">
-                  <p class="text-secondary whitespace-no-wrap">Admin</p>
-                </td>
-                <td class="px-5 py-5 bg-white text-sm">
-                  <p class="text-secondary whitespace-no-wrap">Jan 18, 2020</p>
-                </td>
-                <td class="px-5 py-5   bg-white text-sm text-secondary">
-                    Activo
                 </td>
               </tr>
             </tbody>
@@ -236,3 +36,19 @@
       </div>
     </div>
 </template>
+
+<script setup>
+import editIcon from '../../assets/icons/edit.vue';
+import deleteIcon from '../../assets/icons/delete.vue';
+
+const props = defineProps(["tableHeader", "tableData"]);
+const emit = defineEmits(["editCustomer", "deleteCustomer"])
+
+const onEdit = (val) => {
+  emit("editCustomer", val);
+}
+
+const onDelete = (val) => {
+  emit("deleteCustomer", val.customer_id);
+}
+</script>

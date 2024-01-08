@@ -7,10 +7,10 @@ import arrow from "../assets/cards/analytics/arrow.vue";
 </script>
 
 <template>
-  <div class="lg:px-64 bg-white shadow-lg">
+  <div class="lg:px-32 bg-white shadow-lg">
     <Navbar />
   </div>
-  <div class="px-64 py-6">
+  <div class="px-32 py-6">
     <h3 class="text-xl font-semibold text-secondary py-8">Dashboard</h3>
     <div class="flex space-x-6">
       <analyticsCard
@@ -117,7 +117,7 @@ import arrow from "../assets/cards/analytics/arrow.vue";
       </div>
     </div>
   </div>
-  <div class="px-64 bg-white">
+  <div class="px-32 bg-white">
     <Footer />
   </div>
 </template>

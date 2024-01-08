@@ -1,0 +1,279 @@
+[
+    {
+        "fieldgroup": [
+            {
+                "fieldName": "customer_name",
+                "label": "Customer Name",
+                "fieldType": "text"
+            },
+            {
+                "fieldName": "po_number",
+                "label": "PO Number",
+                "fieldType": "text"
+            }
+        ]
+    },
+    {
+        "fieldgroup": [
+            {
+                "fieldName": "po_date",
+                "label": "Po date",
+                "fieldType": "date"
+            },
+            {
+                "fieldName": "extrusion",
+                "label": "Extrusion",
+                "fieldType": "select",
+                "options": {
+                    "Select": "Select",
+                    "Completed": "Completed",
+                    "In progress": "In progress",
+                    "To be Confirmed": "To be Confirmed",
+                    "Not Applicable": "Not Applicable"
+                }
+            }
+        ]
+    },
+    {
+        "fieldgroup": [
+            {
+                "fieldName": "weaving",
+                "label": "Weaving",
+                "fieldType": "select",
+                "options": {
+                    "Select": "Select",
+                    "Completed": "Completed",
+                    "In progress": "In progress",
+                    "To be Confirmed": "To be Confirmed",
+                    "Not Applicable": "Not Applicable"
+                }
+            },
+            {
+                "fieldName": "lamination",
+                "label": "Lamination",
+                "fieldType": "select",
+                "options": {
+                    "Select": "Select",
+                    "Completed": "Completed",
+                    "In progress": "In progress",
+                    "To be Confirmed": "To be Confirmed",
+                    "Not Applicable": "Not Applicable"
+                }
+            }
+        ]
+    },
+    {
+        "fieldgroup": [
+            {
+                "fieldName": "printing",
+                "label": "Printing",
+                "fieldType": "select",
+                "options": {
+                    "Select": "Select",
+                    "Completed": "Completed",
+                    "In progress": "In progress",
+                    "To be Confirmed": "To be Confirmed",
+                    "Not Applicable": "Not Applicable"
+                }
+            },
+            {
+                "fieldName": "stitching",
+                "label": "Stitching",
+                "fieldType": "select",
+                "options": {
+                    "Select": "Select",
+                    "Completed": "Completed",
+                    "In progress": "In progress",
+                    "To be Confirmed": "To be Confirmed",
+                    "Not Applicable": "Not Applicable"
+                }
+            }
+        ]
+    },
+    {
+        "fieldgroup": [
+            {
+                "fieldName": "final_quality_inspection",
+                "label": "Final quality inspection",
+                "fieldType": "date"
+            },
+            {
+                "fieldName": "cargo_stuffing_date",
+                "label": "Cargo Stuffing date",
+                "fieldType": "date"
+            }
+        ]
+    },
+    {
+        "fieldgroup": [
+            {
+                "fieldName": "container_number",
+                "label": "Container No",
+                "fieldType": "text"
+            },
+            {
+                "fieldName": "shipping_line",
+                "label": "Shipping Line",
+                "fieldType": "text"
+            }
+        ]
+    },
+    {
+        "fieldgroup": [
+            {
+                "fieldName": "on_board_date",
+                "label": "On board date",
+                "fieldType": "date"
+            },
+            {
+                "fieldName": "port_of_loading",
+                "label": "Port of loading",
+                "fieldType": "text"
+            }
+        ]
+    },
+    {
+        "fieldgroup": [
+            {
+                "fieldName": "eta_transhipment_port_1",
+                "label": "ETA transhipment port-1",
+                "fieldType": "date"
+            },
+            {
+                "fieldName": "etd_transhipment_port_1",
+                "label": "ETD transhipment port-1",
+                "fieldType": "date"
+            }
+        ]
+    },
+    {
+        "fieldgroup": [
+            {
+                "fieldName": "eta_transhipment_port_2",
+                "label": "ETA transhipment port-2",
+                "fieldType": "date"
+            },
+            {
+                "fieldName": "etd_transhipment_port_2",
+                "label": "ETD transhipment port-2",
+                "fieldType": "date"
+            }
+        ]
+    },
+    {
+        "fieldgroup": [
+            {
+                "fieldName": "eta_discharge_port",
+                "label": "ETA Discharge port",
+                "fieldType": "text"
+            },
+            {
+                "fieldName": "eta_final_destination",
+                "label": "ETA Final Destination",
+                "fieldType": "date"
+            }
+        ]
+    },
+    {
+        "fieldgroup": [
+            {
+                "fieldName": "total_lead_time",
+                "label": "Total Lead Time",
+                "fieldType": "text"
+            },
+            {
+                "fieldName": "final_inspection_photos",
+                "label": "Final Inspection photos",
+                "fieldType": "file",
+                "accept": ""
+            }
+        ]
+    },
+    {
+        "fieldgroup": [
+            {
+                "fieldName": "final_inspection_report",
+                "label": "Final Inspection report",
+                "fieldType": "file",
+                "accept": ""
+            },
+            {
+                "fieldName": "bag_test_report",
+                "label": "Bag Test report",
+                "fieldType": "file",
+                "accept": ""
+            }
+        ]
+    },
+    {
+        "fieldgroup": [
+            {
+                "fieldName": "bag_test_photos",
+                "label": "Bag Test Photos",
+                "fieldType": "file",
+                "accept": ""
+            },
+            {
+                "fieldName": "stuffing_photo",
+                "label": "Stuffing photo",
+                "fieldType": "file",
+                "accept": ""
+            }
+        ]
+    },
+    {
+        "fieldgroup": [
+            {
+                "fieldName": "sample_inspection_photos",
+                "label": "Sample inspection photos",
+                "fieldType": "file",
+                "accept": ""
+            },
+            {
+                "fieldName": "sample_inspection_report",
+                "label": "Sample inspection report",
+                "fieldType": "file",
+                "accept": ""
+            }
+        ]
+    },
+    {
+        "fieldgroup": [
+            {
+                "fieldName": "sample_tracking_number",
+                "label": "Sample tracking no",
+                "fieldType": "text"
+            },
+            {
+                "fieldName": "tracking_link",
+                "label": "Tracking Link",
+                "fieldType": "select",
+                "options": {
+                    "Select": "Select"
+                }
+            }
+        ]
+    },
+    {
+        "fieldgroup": [
+            {
+                "fieldName": "project_status",
+                "label": "Project Statusk",
+                "fieldType": "select",
+                "options": {
+                    "Select": "Select"
+                }
+            },
+            {
+                "fieldName": "status",
+                "label": "Status",
+                "fieldType": "select",
+                "options": {
+                    "Select": "Select",
+                    "Active": "Active",
+                    "InActive": "InActive"
+                }
+            }
+        ]
+    }
+]
