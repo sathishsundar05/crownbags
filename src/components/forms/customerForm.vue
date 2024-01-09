@@ -97,11 +97,7 @@ const addCustomer = () => {
     name: name.value,
     status: status.value,
   };
-  if(props.prefillData) {
-    emit("updateCustomers", payload);
-  } else {
-    emit("addCustomers", payload);
-  }
+  emit("addCustomers", payload);
 };
 
 onMounted(() => {

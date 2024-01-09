@@ -20,13 +20,16 @@
               class="bg-black bg-opacity-40 data-[state=open]:animate-overlayShow fixed inset-0 z-30"
             />
             <DialogContent
-              class="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none z-[100]"
+              class="overflow-scroll data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none z-[100]"
             >
               <DialogTitle class="m-0 text-secondary font-semibold">
-                Add Customer
+                {{ mode }} Customer
               </DialogTitle>
 
-              <customerForm @addCustomers="addCustomers" @updateCustomers="updateCustomers" :prefillData="prefillData" />
+              <customerForm
+                @addCustomers="addCustomers"
+                :prefillData="prefillData"
+              />
 
               <DialogClose
                 class="text-grass11 hover:bg-green4 focus:shadow-green7 absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-none"
@@ -79,7 +82,8 @@ const tableHeader = ref([
 ]);
 const tableData = ref([]);
 const openForm = ref(false);
-const prefillData = ref('');
+const prefillData = ref("");
+const mode = ref("Add")
 
 onMounted(() => {
   getCustomers();
@@ -101,25 +105,28 @@ const getCustomers = () => {
 };
 
 const addCustomers = (payload) => {
-  cStore.$addCustomer(payload).then((res) => {
-    openForm.value = false;
-    // getCustomers();
-    window.location.reload();
-  });
+  if(mode.value = "Edit") {
+    cStore.$updateCustomer(payload, prefillData.value.customer_id).then((res) => {
+      openForm.value = false;
+      window.location.reload();
+    });
+  } else {
+    cStore.$addCustomer(payload).then((res) => {
+      openForm.value = false;
+      window.location.reload();
+    });
+  }
 };
 
 const editCustomer = (payload) => {
   prefillData.value = payload;
+  mode.value = "Edit"
   openForm.value = true;
 };
 
-const updateCustomers = (payload) => {
-  cStore.$updateCustomer(payload).then((res) => {});
-}
-
 const deleteCustomer = (id) => {
-  cStore.$deleteCustomer(id).then((res) => {
-    // getCustomers();
+  cStore.$deleteCustomer(id).then(async (res) => {
+    openForm.value = false;
     window.location.reload();
   });
 };
