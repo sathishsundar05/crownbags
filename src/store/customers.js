@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import { baseUrl } from "../const/index"
 import axios from "axios";
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 export const customerStore = defineStore('customerStore', {
   state: () => {

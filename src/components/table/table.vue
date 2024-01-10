@@ -17,11 +17,11 @@
             <tbody>
               <tr class="border-b border-secondary border-opacity-20" v-for="data, tableIndex in tableData" :key="tableIndex">
                 <td class="px-5 py-5 bg-white text-sm" v-for="columnValue, columnKey, colIndex in data" :key="colIndex">
-                  <div v-if="columnKey === 'customer_id'" class="flex space-x-2">
+                  <div v-if="columnKey === 'customer_id' || columnKey === 'order_id'" class="flex space-x-2">
                     <editIcon @click="onEdit(data)" />
                     <deleteIcon @click="onDelete(data)" />
                   </div>
-                  <div class="flex items-center" v-else>
+                  <div class="flex items-center" v-else-if="columnKey !== 'status'">
                     <div class="ml-3">
                       <p class="text-secondary whitespace-no-wrap">
                         {{ columnValue }}
@@ -42,13 +42,13 @@ import editIcon from '../../assets/icons/edit.vue';
 import deleteIcon from '../../assets/icons/delete.vue';
 
 const props = defineProps(["tableHeader", "tableData"]);
-const emit = defineEmits(["editCustomer", "deleteCustomer"])
+const emit = defineEmits(["edit", "delete"])
 
 const onEdit = (val) => {
-  emit("editCustomer", val);
+  emit("edit", val);
 }
 
 const onDelete = (val) => {
-  emit("deleteCustomer", val.customer_id);
+  emit("delete", val.customer_id || val.order_id);
 }
 </script>

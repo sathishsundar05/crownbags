@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <nav class="relative py-4 flex justify-between items-center">
-      <a class="text-3xl font-bold leading-none" href="#">
+      <a class="text-3xl font-bold leading-none" href="/">
         <img src="../../assets/logo/logo.png" class="w-40" />
       </a>
       <div class="lg:hidden">

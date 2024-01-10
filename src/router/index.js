@@ -35,6 +35,11 @@ const router = createRouter({
       component: AddOrder
     },
     {
+      path: '/editorder',
+      name: 'Edit Order',
+      component: AddOrder
+    },
+    {
       path: '/courier',
       name: 'Courier',
       component: Courier

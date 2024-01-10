@@ -63,7 +63,6 @@
         id="status"
         class="shadow-sm bg-gray-50 border border-secondary text-secondary focus:outline-primary text-sm rounded-lg block w-full p-2.5"
       >
-        <option value="">Select</option>
         <option value="1">Active</option>
         <option value="0">Inactive</option>
       </select>

@@ -9,7 +9,7 @@
 
         <button
           class="text-sm text-white rounded-lg bg-gradient-to-b from-primary-light to-primary-dark px-4 py-2"
-          @click="openForm = !openForm"
+          @click="openAddForm"
         >
           Add Customer
         </button>
@@ -44,8 +44,8 @@
       <Table
         :tableData="tableData"
         :tableHeader="tableHeader"
-        @editCustomer="editCustomer"
-        @deleteCustomer="deleteCustomer"
+        @edit="editCustomer"
+        @delete="deleteCustomer"
       />
     </div>
     <div class="lg:px-32 bg-white">
@@ -92,20 +92,26 @@ onMounted(() => {
 const getCustomers = () => {
   cStore.$getCustomers().then((res) => {
     res.map((v) => {
-      const { name, mobilenumber, username, password, customer_id } = v;
+      const { name, mobilenumber, username, password, customer_id, status } = v;
       tableData.value.push({
         name,
         mobilenumber,
         username,
         password,
         customer_id,
+        status
       });
     });
   });
 };
 
+const openAddForm = () => {
+  openForm.value = true;
+  mode.value = "Add"
+}
+
 const addCustomers = (payload) => {
-  if(mode.value = "Edit") {
+  if(mode.value === "Edit") {
     cStore.$updateCustomer(payload, prefillData.value.customer_id).then((res) => {
       openForm.value = false;
       window.location.reload();
