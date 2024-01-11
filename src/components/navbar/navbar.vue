@@ -52,7 +52,7 @@
             :align-offset="30"
             :side="right"
           >
-            <p class="p-2">Logout</p>
+            <p class="p-2" @click="doLogout">Logout</p>
           </DropdownMenuContent>
         </DropdownMenuRoot>
       </div>
@@ -140,4 +140,9 @@ const toggleMenu = () => {
 const toggleDropdown = () => {
   dropdownModal.value = !dropdownModal.value;
 };
+
+const doLogout = () => {
+  localStorage.removeItem("userDetails");
+  window.location.reload();
+}
 </script>

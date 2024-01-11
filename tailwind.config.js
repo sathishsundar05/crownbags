@@ -14,6 +14,8 @@ export default {
       black: "#000",
       gray: {
         DEFAULT: "#8492a6",
+        50: "rgb(249 250 251)",
+        200: "rgb(229 231 235)",
       },
       primary: {
         DEFAULT: "#1c4622",

@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vuepic/vue-datepicker": "^7.4.1",
     "axios": "^1.6.5",
     "pinia": "^2.1.7",
     "preline": "^2.0.3",

@@ -14,7 +14,7 @@
           </button>
         </router-link>
       </div>
-      <Table 
+      <MaterialTable
         :tableData="tableData"
         :tableHeader="tableHeader"
         @edit="editOrder"
@@ -32,16 +32,18 @@ import { onMounted, ref } from "vue";
 import Navbar from "../components/navbar/navbar.vue";
 import Footer from "../components/footer/footer.vue";
 import Table from "../components/table/table.vue";
+import MaterialTable from "../components/table/MaterialTable.vue";
 import { orderStore } from "../store/orders";
 import { useRouter } from "vue-router";
 
 const oStore = orderStore();
 const tableHeader = ref([
+  "S.No",
+  "Customer Name",
   "PO Number",
-  "Extrusion",
-  "Weaving",
-  "Lamination",
-  "Action",
+  "PO Date",
+  "Project Status",
+  "Action"
 ]);
 const tableData = ref([]);
 const router = useRouter();
@@ -52,22 +54,23 @@ onMounted(() => {
 
 const getCustomers = () => {
   oStore.$getOrders().then((res) => {
-    res.map((v) => {
-      const { po_number, extrusion, weaving, lamination, order_id, status } = v;
+    res.map((v, index) => {
+      const { po_number, po_date, project_status, lamination, order_id, status } = v;
+      const sno =  (index+1);
       tableData.value.push({
+        sno,
+        'customer_name': 'Customer_name',
         po_number,
-        extrusion,
-        weaving,
-        lamination,
+        po_date: formatDate(po_date),
+        project_status,
         order_id,
-        status
       });
     });
   });
 };
 
 const editOrder = (payload) => {
-  router.push("editorder?id="+payload.order_id);
+  router.push("editorder?id=" + payload.order_id);
 };
 
 const deleteOrder = (id) => {
@@ -75,4 +78,11 @@ const deleteOrder = (id) => {
     window.location.reload();
   });
 };
+
+const formatDate = (dateString) => {
+  const dateObject = new Date(dateString);
+
+  const options = { day: 'numeric', month: 'short', year: 'numeric' };
+  return dateObject.toLocaleString('en-US', options);
+}
 </script>

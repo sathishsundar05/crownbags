@@ -4,7 +4,8 @@
             {
                 "fieldName": "customer_name",
                 "label": "Customer Name",
-                "fieldType": "text"
+                "fieldType": "select",
+                "optionsSource": "dynamic"
             },
             {
                 "fieldName": "po_number",
@@ -17,13 +18,14 @@
         "fieldgroup": [
             {
                 "fieldName": "po_date",
-                "label": "Po date",
+                "label": "Po Date",
                 "fieldType": "date"
             },
             {
                 "fieldName": "extrusion",
                 "label": "Extrusion",
                 "fieldType": "select",
+                "optionsSource": "local",
                 "options": {
                     "Select": "Select",
                     "Completed": "Completed",
@@ -40,6 +42,7 @@
                 "fieldName": "weaving",
                 "label": "Weaving",
                 "fieldType": "select",
+                "optionsSource": "local",
                 "options": {
                     "Select": "Select",
                     "Completed": "Completed",
@@ -52,6 +55,7 @@
                 "fieldName": "lamination",
                 "label": "Lamination",
                 "fieldType": "select",
+                "optionsSource": "local",
                 "options": {
                     "Select": "Select",
                     "Completed": "Completed",
@@ -68,8 +72,9 @@
                 "fieldName": "printing",
                 "label": "Printing",
                 "fieldType": "select",
+                "optionsSource": "local",
                 "options": {
-                    "Select": "Select",
+                    "NA": "Select",
                     "Completed": "Completed",
                     "In progress": "In progress",
                     "To be Confirmed": "To be Confirmed",
@@ -80,8 +85,9 @@
                 "fieldName": "stitching",
                 "label": "Stitching",
                 "fieldType": "select",
+                "optionsSource": "local",
                 "options": {
-                    "Select": "Select",
+                    "NA": "Select",
                     "Completed": "Completed",
                     "In progress": "In progress",
                     "To be Confirmed": "To be Confirmed",
@@ -94,12 +100,12 @@
         "fieldgroup": [
             {
                 "fieldName": "final_quality_inspection",
-                "label": "Final quality inspection",
+                "label": "Final Quality Inspection",
                 "fieldType": "date"
             },
             {
                 "fieldName": "cargo_stuffing_date",
-                "label": "Cargo Stuffing date",
+                "label": "Cargo Stuffing Date",
                 "fieldType": "date"
             }
         ]
@@ -122,12 +128,12 @@
         "fieldgroup": [
             {
                 "fieldName": "on_board_date",
-                "label": "On board date",
+                "label": "On Board Date",
                 "fieldType": "date"
             },
             {
                 "fieldName": "port_of_loading",
-                "label": "Port of loading",
+                "label": "Port of Loading",
                 "fieldType": "text"
             }
         ]
@@ -136,12 +142,12 @@
         "fieldgroup": [
             {
                 "fieldName": "eta_transhipment_port_1",
-                "label": "ETA transhipment port-1",
+                "label": "ETA Transhipment Port-1",
                 "fieldType": "date"
             },
             {
                 "fieldName": "etd_transhipment_port_1",
-                "label": "ETD transhipment port-1",
+                "label": "ETD Transhipment Port-1",
                 "fieldType": "date"
             }
         ]
@@ -150,12 +156,12 @@
         "fieldgroup": [
             {
                 "fieldName": "eta_transhipment_port_2",
-                "label": "ETA transhipment port-2",
+                "label": "ETA Transhipment Port-2",
                 "fieldType": "date"
             },
             {
                 "fieldName": "etd_transhipment_port_2",
-                "label": "ETD transhipment port-2",
+                "label": "ETD Transhipment Port-2",
                 "fieldType": "date"
             }
         ]
@@ -164,7 +170,7 @@
         "fieldgroup": [
             {
                 "fieldName": "eta_discharge_port",
-                "label": "ETA Discharge port",
+                "label": "ETA Discharge Port",
                 "fieldType": "text"
             },
             {
@@ -179,13 +185,15 @@
             {
                 "fieldName": "total_lead_time",
                 "label": "Total Lead Time",
-                "fieldType": "text"
+                "fieldType": "calculate",
+                "state": 1
             },
             {
                 "fieldName": "final_inspection_photos",
-                "label": "Final Inspection photos",
+                "label": "Final Inspection Photos",
                 "fieldType": "file",
-                "accept": ""
+                "accept": "image/*",
+                "allowMultiple": true
             }
         ]
     },
@@ -193,15 +201,17 @@
         "fieldgroup": [
             {
                 "fieldName": "final_inspection_report",
-                "label": "Final Inspection report",
+                "label": "Final Inspection Report",
                 "fieldType": "file",
-                "accept": ""
+                "accept": ".pdf,.doc,.docx,.txt",
+                "allowMultiple": true
             },
             {
                 "fieldName": "bag_test_report",
-                "label": "Bag Test report",
+                "label": "Bag Test Report",
                 "fieldType": "file",
-                "accept": ""
+                "accept": ".pdf,.doc,.docx,.txt",
+                "allowMultiple": true
             }
         ]
     },
@@ -211,13 +221,13 @@
                 "fieldName": "bag_test_photos",
                 "label": "Bag Test Photos",
                 "fieldType": "file",
-                "accept": ""
+                "accept": "image/*"
             },
             {
                 "fieldName": "stuffing_photo",
-                "label": "Stuffing photo",
+                "label": "Stuffing Photo",
                 "fieldType": "file",
-                "accept": ""
+                "accept": "image/*"
             }
         ]
     },
@@ -225,15 +235,15 @@
         "fieldgroup": [
             {
                 "fieldName": "sample_inspection_photos",
-                "label": "Sample inspection photos",
+                "label": "Sample Inspection Photos",
                 "fieldType": "file",
-                "accept": ""
+                "accept": "image/*"
             },
             {
                 "fieldName": "sample_inspection_report",
-                "label": "Sample inspection report",
+                "label": "Sample Inspection Report",
                 "fieldType": "file",
-                "accept": ""
+                "accept": ".pdf,.doc,.docx,.txt"
             }
         ]
     },
@@ -241,13 +251,14 @@
         "fieldgroup": [
             {
                 "fieldName": "sample_tracking_number",
-                "label": "Sample tracking no",
+                "label": "Sample Tracking No",
                 "fieldType": "text"
             },
             {
                 "fieldName": "tracking_link",
                 "label": "Tracking Link",
                 "fieldType": "select",
+                "optionsSource": "local",
                 "options": {
                     "Select": "Select"
                 }
@@ -258,20 +269,22 @@
         "fieldgroup": [
             {
                 "fieldName": "project_status",
-                "label": "Project Statusk",
+                "label": "Project Status",
                 "fieldType": "select",
+                "optionsSource": "local",
                 "options": {
-                    "Select": "Select"
+                    "In Progress": "In Progress",
+                    "Completed": "Completed"
                 }
             },
             {
                 "fieldName": "status",
                 "label": "Status",
                 "fieldType": "select",
+                "optionsSource": "local",
                 "options": {
-                    "Select": "Select",
-                    "Active": "Active",
-                    "InActive": "InActive"
+                    "In Progress": "Active",
+                    "Completed": "InActive"
                 }
             }
         ]
