@@ -5,7 +5,7 @@
         >Customer Name</label
       >
       <input
-        v-model="username"
+        v-model="name"
         type="text"
         class="shadow-sm bg-gray-50 border border-secondary text-secondary focus:outline-primary text-sm rounded-lg block w-full p-2.5"
         required
@@ -33,7 +33,7 @@
         >User Name</label
       >
       <input
-        v-model="name"
+        v-model="username"
         type="text"
         class="shadow-sm bg-gray-50 border border-secondary text-secondary focus:outline-primary text-sm rounded-lg block w-full p-2.5"
         required
@@ -69,7 +69,7 @@
     </div>
     <div class="flex justify-end">
       <button
-        class="text-sm text-white rounded-lg mt-2 bg-gradient-to-b from-primary-light to-primary-dark px-4 py-2"
+        class="text-sm text-white rounded-lg mt-2 bg-primary px-4 py-2"
         @click="addCustomer"
       >
         Save changes
@@ -90,12 +90,18 @@ const status = ref("")
 
 const addCustomer = () => {
   let payload = {
-    mobilenumber: mobilenumber.value,
-    username: username.value,
-    password: password.value,
-    name: name.value,
-    status: status.value,
-  };
+    "gofor": props.prefillData ? "editcustomers" : "addcustomers",
+    "mobilenumber": mobilenumber.value,
+    "username": username.value,
+    "password": password.value,
+    "name": name.value,
+    "status": status.value,
+  }
+
+  if(props.prefillData) {
+    payload['customer_id'] = props.prefillData.customer_id;
+  }
+
   emit("addCustomers", payload);
 };
 

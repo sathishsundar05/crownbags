@@ -1,58 +1,11 @@
 <template>
-  <section class="container mx-auto">
-    <!-- <div class="mt-6 md:flex md:items-center md:justify-between">
-      <div
-        class="inline-flex overflow-hidden bg-white border divide-x rounded-lg"
-      >
-        <button
-          class="px-5 py-2 text-xs font-medium text-secondary transition-colors duration-200 bg-gray-100 sm:text-sm bg-gray-200"
-        >
-          All
-        </button>
-        <button
-          class="px-5 py-2 text-xs font-medium text-secondary transition-colors duration-200 bg-gray-100 sm:text-sm hover:bg-gray-50"
-        >
-          In Progress
-        </button>
-
-        <button
-          class="px-5 py-2 text-xs font-medium text-secondary transition-colors duration-200 sm:text-sm hover:bg-gray-50"
-        >
-          Completed
-        </button>
-      </div>
-
-      <div class="relative flex items-center mt-4 md:mt-0">
-        <span class="absolute">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-5 h-5 mx-3 text-gray-400"
+  <section>
+    <div class="flex flex-col">
+      <div class="overflow-x-auto sm:-mx-6">
+        <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-6">
+          <div
+            class="overflow-hidden border border-gray-200 md:rounded-lg bg-white"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-            />
-          </svg>
-        </span>
-
-        <input
-          type="text"
-          placeholder="Search"
-          class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-          v-model="searchedText"
-        />
-      </div>
-    </div> -->
-
-    <div class="flex flex-col mt-6">
-      <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-          <div class="overflow-hidden border border-gray-200 md:rounded-lg min-h-[580px] bg-white">
             <table class="min-w-full divide-y divide-gray-200">
               <thead class="bg-gray-50">
                 <tr>
@@ -78,12 +31,45 @@
                   >
                     <div
                       v-if="
-                        columnKey === 'customer_id' || columnKey === 'order_id' || columnKey === 'courier_id'
+                        columnKey === 'customer_id' ||
+                        columnKey === 'courier_id'
                       "
                       class="flex space-x-2"
                     >
-                      <editIcon @click="onEdit(data)" />
-                      <deleteIcon @click="onDelete(data)" />
+                      <editIcon @click="onEdit(data)" class="text-primary cursor-pointer" />
+                      <deleteIcon @click="onDelete(data)" class="text-red cursor-pointer" />
+                    </div>
+                    <div
+                      v-else-if="
+                        columnKey === 'order_id'
+                      "
+                      class="flex space-x-2"
+                    >
+                      <editIcon @click="onEdit(data)" class="text-primary cursor-pointer" />
+                      <deleteIcon @click="onDelete(data)" class="text-red cursor-pointer" />
+                      <navigateIcon @click="navigateTo(data)"></navigateIcon>
+                    </div>
+                    <div v-else-if="columnKey === 'action'" class="flex space-x-2">
+                      <button
+                        class="text-sm text-white rounded-lg bg-primary px-2 py-1"
+                        @click="onviewDetails(data)"
+                      >
+                        View
+                      </button>
+                    </div>
+                    <div v-else-if="columnKey === 'project_status'">
+                      <span
+                        v-if="columnValue === 'Completed'"
+                        class="border border-[green] rounded-2xl text-[green] px-4 py-1 font-smibold"
+                      >
+                        {{ columnValue }}
+                      </span>
+                      <span
+                        v-if="columnValue === 'In Progress'"
+                        class="border border-[orange] rounded-2xl text-[orange] px-4 py-1 font-smibold"
+                      >
+                        {{ columnValue }}
+                      </span>
                     </div>
                     <div
                       class="flex items-center"
@@ -167,15 +153,19 @@
 
 <script setup>
 import { ref, computed } from "vue";
+import { useRouter } from "vue-router";
 import editIcon from "../../assets/icons/edit.vue";
 import deleteIcon from "../../assets/icons/delete.vue";
+import navigateIcon from "../../assets/icons/navigateIcon.vue";
 
 const props = defineProps(["tableHeader", "tableData"]);
-const emit = defineEmits(["edit", "delete"]);
+const emit = defineEmits(["edit", "delete", "viewDetails"]);
 
 const currentPage = ref(0);
 const itemsPerPage = ref(10);
 const searchedText = ref("");
+
+const router = useRouter();
 
 const onEdit = (val) => {
   emit("edit", val);
@@ -183,6 +173,10 @@ const onEdit = (val) => {
 
 const onDelete = (val) => {
   emit("delete", val.customer_id || val.order_id || val.courier_id);
+};
+
+const onviewDetails = (val) => {
+  emit("viewDetails", val);
 };
 
 const diablePrev = computed(() => {
@@ -213,21 +207,21 @@ const itemTo = () => {
 
 const filteredTableData = () => {
   const tData = [...props.tableData];
-//refactor this later
-//   if (searchedText.value.length > 0) {
-//     const filterBySearchText = tData.filter((object) =>
-//       Object.values(object).some(
-//         (value) =>
-//           typeof value === "string" &&
-//           value
-//             .toLocaleLowerCase()
-//             .includes(searchedText.value.toLocaleLowerCase())
-//       )
-//     );
-//     return filterBySearchText.splice(itemFrom(), itemsPerPage.value);
-//   } else {
-    return tData.splice(itemFrom(), itemsPerPage.value);
-//   }
+  //refactor this later
+  //   if (searchedText.value.length > 0) {
+  //     const filterBySearchText = tData.filter((object) =>
+  //       Object.values(object).some(
+  //         (value) =>
+  //           typeof value === "string" &&
+  //           value
+  //             .toLocaleLowerCase()
+  //             .includes(searchedText.value.toLocaleLowerCase())
+  //       )
+  //     );
+  //     return filterBySearchText.splice(itemFrom(), itemsPerPage.value);
+  //   } else {
+  return tData.splice(itemFrom(), itemsPerPage.value);
+  //   }
 };
 
 const loadPrevItems = () => {
@@ -237,4 +231,9 @@ const loadPrevItems = () => {
 const loadNextItems = () => {
   currentPage.value = currentPage.value + 1;
 };
+
+const navigateTo = (data) => {
+  console.log(data?.order_id);
+  router.push("/order/view/"+data?.order_id);
+}
 </script>

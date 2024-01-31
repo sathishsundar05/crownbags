@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <nav class="relative py-4 flex justify-between items-center">
-      <a class="text-3xl font-bold leading-none" href="/">
+      <a class="text-3xl font-bold leading-none" href="/CRM">
         <img src="../../assets/logo/logo.png" class="w-40" />
       </a>
       <div class="lg:hidden">
@@ -20,7 +20,7 @@
         <ul class="top-1/2 flex lg:space-x-6">
           <li
             class="text-secondary hover:cursor-pointer hover:text-primary px-4 py-2 rounded-lg"
-            v-for="(menu, index) in menuList"
+            v-for="(menu, index) in props.menuList"
             :key="index"
           >
           <router-link :to="menu.to">
@@ -34,25 +34,23 @@
               class="flex justify-center items-center pl-3 hover:cursor-pointer"
             >
               <div
-                class="rounded-full bg-gradient-to-b from-primary-light to-primary-dark p-2"
+                class="rounded-full bg-primary p-2"
               >
-                <p class="text-xs text-white">AA</p>
+                <p class="text-xs text-white">{{ getShortName }}</p>
               </div>
               <div
                 class="pl-3 text-secondary text-md hover:text-primary"
               >
-                Hi, Admin
+                Hi, {{ username }}
               </div>
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            class="w-auto outline-none bg-white rounded-md shadow-lg border border-secondary-light will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
+            class="w-auto outline-none cursor-pointer bg-white rounded-md shadow-lg border border-secondary-light will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
             :side-offset="15"
-            :align="end"
             :align-offset="30"
-            :side="right"
           >
-            <p class="p-2" @click="doLogout">Logout</p>
+            <p class="px-6 py-2" @click="doLogout">Logout</p>
           </DropdownMenuContent>
         </DropdownMenuRoot>
       </div>
@@ -86,18 +84,19 @@
             </svg>
           </button>
         </div>
-        <div>
+        <div class="flex flex-col justify-between h-full">
           <ul>
             <li
               class="mb-1 text-secondary hover:cursor-pointer hover:text-primary"
-              v-for="(menu, index) in menuList"
+              v-for="(menu, index) in props.menuList"
               :key="index"
             >
-              <a class="block p-4 text-sm font-semibold rounded" href="#">{{
-                menu.name
-              }}</a>
+              <router-link :to="menu.to">
+                <div class="p-4 text-sm font-semibold">{{ menu.name }}</div>
+              </router-link>
             </li>
           </ul>
+          <p class="p-4 text-sm font-semibold text-secondary" @click="doLogout">Logout</p>
         </div>
         <div class="mt-auto">
           <p class="my-4 text-xs text-center">
@@ -110,28 +109,17 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import {
   DropdownMenuContent,
   DropdownMenuRoot,
   DropdownMenuTrigger,
 } from "radix-vue";
+
+const props = defineProps(["menuList"])
+
 const menuModal = ref(false);
 const dropdownModal = ref(false);
-const menuList = ref([
-  {
-    name: "Customers",
-    to: "/customer",
-  },
-  {
-    name: "Orders",
-    to: "/order",
-  },
-  {
-    name: "Courier",
-    to: "/courier",
-  },
-]);
 
 const toggleMenu = () => {
   menuModal.value = !menuModal.value;
@@ -140,6 +128,15 @@ const toggleMenu = () => {
 const toggleDropdown = () => {
   dropdownModal.value = !dropdownModal.value;
 };
+
+const username = computed(() => {
+  const getData = localStorage.getItem('userDetails');
+  return JSON.parse(getData).name
+})
+
+const getShortName = computed(() => {
+  return username.value.slice(0,2).toUpperCase();
+})
 
 const doLogout = () => {
   localStorage.removeItem("userDetails");

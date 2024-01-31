@@ -5,13 +5,13 @@ import axios from "axios";
 export const customerStore = defineStore('customerStore', {
   state: () => {
     return {
-      customers: null
+      customers: null,
     }
   },
   actions: {
     async $getCustomers() {
         try {
-            const response = await axios.get(`${baseUrl}viewcustomers`);
+            const response = await axios.get(`${baseUrl}?gofor=customerslist`);
             this.customers = [...response.data];
             return this.customers;
         } catch (err) {
@@ -21,7 +21,7 @@ export const customerStore = defineStore('customerStore', {
     },
     $addCustomer(payload) {
         return new Promise((resolve, reject) => {
-            axios.post(`${baseUrl}addcustomers`, payload).then(response => {
+            axios.post(`${baseUrl}`, payload).then(response => {
                 resolve(response.data);
             }).catch(err => {
                 console.log("Error: ", err);
@@ -29,9 +29,9 @@ export const customerStore = defineStore('customerStore', {
             })
         })
     },
-    async $updateCustomer(payload, id) {
+    async $updateCustomer(payload) {
         try {
-            const response = axios.post(`${baseUrl}updatecustomers/${id}`, payload);
+            const response = axios.post(`${baseUrl}`, payload);
             return response.data;
         } catch (err) {
             console.error("Error: ", err);
@@ -40,7 +40,7 @@ export const customerStore = defineStore('customerStore', {
     },
     async $deleteCustomer(id) {
         try {
-            const response = axios.post(`${baseUrl}deletecustomers/${id}`);
+            const response = axios.get(`${baseUrl}?gofor=customersdelete&customer_id=${id}`);
             return response.data;
         } catch (err) {
             console.error("Error: ", err);

@@ -5,12 +5,15 @@
                 "fieldName": "customer_name",
                 "label": "Customer Name",
                 "fieldType": "select",
-                "optionsSource": "dynamic"
+                "optionsSource": "dynamic",
+                "optionsSourceKey": "customerList",
+                "width": "w-full lg:w-1/2"
             },
             {
                 "fieldName": "po_number",
                 "label": "PO Number",
-                "fieldType": "text"
+                "fieldType": "text",
+                "width": "w-full lg:w-1/2"
             }
         ]
     },
@@ -19,7 +22,8 @@
             {
                 "fieldName": "po_date",
                 "label": "Po Date",
-                "fieldType": "date"
+                "fieldType": "date",
+                "width": "w-full lg:w-1/2"
             },
             {
                 "fieldName": "extrusion",
@@ -27,12 +31,13 @@
                 "fieldType": "select",
                 "optionsSource": "local",
                 "options": {
-                    "Select": "Select",
                     "Completed": "Completed",
                     "In progress": "In progress",
                     "To be Confirmed": "To be Confirmed",
                     "Not Applicable": "Not Applicable"
-                }
+                },
+                "fieldValue": "Completed",
+                "width": "w-full lg:w-1/2"
             }
         ]
     },
@@ -44,12 +49,13 @@
                 "fieldType": "select",
                 "optionsSource": "local",
                 "options": {
-                    "Select": "Select",
                     "Completed": "Completed",
                     "In progress": "In progress",
                     "To be Confirmed": "To be Confirmed",
                     "Not Applicable": "Not Applicable"
-                }
+                },
+                "fieldValue": "Completed",
+                "width": "w-full lg:w-1/2"
             },
             {
                 "fieldName": "lamination",
@@ -57,12 +63,13 @@
                 "fieldType": "select",
                 "optionsSource": "local",
                 "options": {
-                    "Select": "Select",
                     "Completed": "Completed",
                     "In progress": "In progress",
                     "To be Confirmed": "To be Confirmed",
                     "Not Applicable": "Not Applicable"
-                }
+                },
+                "fieldValue": "Completed",
+                "width": "w-full lg:w-1/2"
             }
         ]
     },
@@ -74,12 +81,13 @@
                 "fieldType": "select",
                 "optionsSource": "local",
                 "options": {
-                    "NA": "Select",
                     "Completed": "Completed",
                     "In progress": "In progress",
                     "To be Confirmed": "To be Confirmed",
                     "Not Applicable": "Not Applicable"
-                }
+                },
+                "fieldValue": "Completed",
+                "width": "w-full lg:w-1/2"
             },
             {
                 "fieldName": "stitching",
@@ -87,12 +95,13 @@
                 "fieldType": "select",
                 "optionsSource": "local",
                 "options": {
-                    "NA": "Select",
                     "Completed": "Completed",
                     "In progress": "In progress",
                     "To be Confirmed": "To be Confirmed",
                     "Not Applicable": "Not Applicable"
-                }
+                },
+                "fieldValue": "Completed",
+                "width": "w-full lg:w-1/2"
             }
         ]
     },
@@ -100,13 +109,15 @@
         "fieldgroup": [
             {
                 "fieldName": "final_quality_inspection",
-                "label": "Final Quality Inspection",
-                "fieldType": "date"
+                "label": "Final Quality Inspection Date",
+                "fieldType": "date",
+                "width": "w-full lg:w-1/2"
             },
             {
                 "fieldName": "cargo_stuffing_date",
                 "label": "Cargo Stuffing Date",
-                "fieldType": "date"
+                "fieldType": "date",
+                "width": "w-full lg:w-1/2"
             }
         ]
     },
@@ -115,12 +126,14 @@
             {
                 "fieldName": "container_number",
                 "label": "Container No",
-                "fieldType": "text"
+                "fieldType": "text",
+                "width": "w-full lg:w-1/2"
             },
             {
                 "fieldName": "shipping_line",
                 "label": "Shipping Line",
-                "fieldType": "text"
+                "fieldType": "text",
+                "width": "w-full lg:w-1/2"
             }
         ]
     },
@@ -129,12 +142,14 @@
             {
                 "fieldName": "on_board_date",
                 "label": "On Board Date",
-                "fieldType": "date"
+                "fieldType": "date",
+                "width": "w-full lg:w-1/2"
             },
             {
                 "fieldName": "port_of_loading",
                 "label": "Port of Loading",
-                "fieldType": "text"
+                "fieldType": "text",
+                "width": "w-full lg:w-1/2"
             }
         ]
     },
@@ -143,12 +158,14 @@
             {
                 "fieldName": "eta_transhipment_port_1",
                 "label": "ETA Transhipment Port-1",
-                "fieldType": "date"
+                "fieldType": "date",
+                "width": "w-full lg:w-1/2"
             },
             {
                 "fieldName": "etd_transhipment_port_1",
                 "label": "ETD Transhipment Port-1",
-                "fieldType": "date"
+                "fieldType": "date",
+                "width": "w-full lg:w-1/2"
             }
         ]
     },
@@ -157,61 +174,127 @@
             {
                 "fieldName": "eta_transhipment_port_2",
                 "label": "ETA Transhipment Port-2",
-                "fieldType": "date"
+                "fieldType": "date",
+                "width": "w-full lg:w-1/2"
             },
             {
                 "fieldName": "etd_transhipment_port_2",
                 "label": "ETD Transhipment Port-2",
-                "fieldType": "date"
+                "fieldType": "date",
+                "width": "w-full lg:w-1/2"
             }
         ]
     },
     {
         "fieldgroup": [
+            {
+                "fieldName": "discharge_port",
+                "label": "Discharge Port",
+                "fieldType": "text",
+                "width": "w-full lg:w-1/2"
+            },
             {
                 "fieldName": "eta_discharge_port",
                 "label": "ETA Discharge Port",
-                "fieldType": "text"
-            },
-            {
-                "fieldName": "eta_final_destination",
-                "label": "ETA Final Destination",
-                "fieldType": "date"
+                "fieldType": "date",
+                "width": "w-full lg:w-1/2"
             }
         ]
     },
     {
         "fieldgroup": [
+            {
+                "fieldName": "eta_final_destination",
+                "label": "ETA Final Destination",
+                "fieldType": "date",
+                "width": "w-full lg:w-1/2"
+            },
             {
                 "fieldName": "total_lead_time",
                 "label": "Total Lead Time",
                 "fieldType": "calculate",
-                "state": 1
+                "state": 1,
+                "width": "w-full lg:w-1/2"
+            }
+        ]
+    },
+    {
+        "fieldgroup": [
+            {
+                "fieldName": "sample_tracking_number",
+                "label": "Sample Tracking No",
+                "fieldType": "text",
+                "width": "w-full lg:w-1/2"
             },
+            {
+                "fieldName": "delivery_address",
+                "label": "Delivery Address",
+                "fieldType": "text",
+                "width": "w-full lg:w-1/2"
+            }
+        ]
+    },
+    {
+        "fieldgroup": [
+            {
+                "fieldName": "delivery_country",
+                "label": "Delivery Country",
+                "fieldType": "text",
+                "width": "w-full lg:w-1/2"
+            },
+            {
+                "fieldName": "delivery_pincode",
+                "label": "Delivery Zipcode",
+                "fieldType": "text",
+                "width": "w-full lg:w-1/2"
+            }
+        ]
+    },
+    {
+        "fieldgroup": [
+            {
+                "fieldName": "tracking_link",
+                "label": "Sample Tracking Link",
+                "fieldType": "select",
+                "optionsSource": "dynamic",
+                "optionsSourceKey": "courierList",
+                "width": "w-full lg:w-1/2"
+            }
+        ]
+    },
+    {
+        "fieldgroup": [
             {
                 "fieldName": "final_inspection_photos",
                 "label": "Final Inspection Photos",
                 "fieldType": "file",
                 "accept": "image/*",
-                "allowMultiple": true
+                "allowMultiple": true,
+                "width": "w-full"
             }
         ]
     },
     {
         "fieldgroup": [
             {
-                "fieldName": "final_inspection_report",
+                "fieldName": "final_inspection_reports",
                 "label": "Final Inspection Report",
                 "fieldType": "file",
-                "accept": ".pdf,.doc,.docx,.txt",
-                "allowMultiple": true
-            },
+                "accept": ".pdf",
+                "allowMultiple": true,
+                "width": "w-full"
+            }
+        ]
+    },
+    {
+        "fieldgroup": [
             {
-                "fieldName": "bag_test_report",
+                "fieldName": "bag_test_reports",
                 "label": "Bag Test Report",
                 "fieldType": "file",
                 "accept": ".pdf,.doc,.docx,.txt",
-                "allowMultiple": true
+                "allowMultiple": true,
+                "width": "w-full"
             }
         ]
     },
@@ -221,13 +304,21 @@
                 "fieldName": "bag_test_photos",
                 "label": "Bag Test Photos",
                 "fieldType": "file",
-                "accept": "image/*"
-            },
+                "accept": "image/*",
+                "allowMultiple": true,
+                "width": "w-full"
+            }
+        ]
+    },
+    {
+        "fieldgroup": [
             {
-                "fieldName": "stuffing_photo",
-                "label": "Stuffing Photo",
+                "fieldName": "stuffing_photos",
+                "label": "Stuffing Photos",
                 "fieldType": "file",
-                "accept": "image/*"
+                "accept": "image/*",
+                "allowMultiple": true,
+                "width": "w-full"
             }
         ]
     },
@@ -235,33 +326,23 @@
         "fieldgroup": [
             {
                 "fieldName": "sample_inspection_photos",
-                "label": "Sample Inspection Photos",
+                "label": "Production Sample Inspection Photos",
                 "fieldType": "file",
-                "accept": "image/*"
-            },
-            {
-                "fieldName": "sample_inspection_report",
-                "label": "Sample Inspection Report",
-                "fieldType": "file",
-                "accept": ".pdf,.doc,.docx,.txt"
+                "accept": "image/*",
+                "allowMultiple": true,
+                "width": "w-full"
             }
         ]
     },
     {
         "fieldgroup": [
             {
-                "fieldName": "sample_tracking_number",
-                "label": "Sample Tracking No",
-                "fieldType": "text"
-            },
-            {
-                "fieldName": "tracking_link",
-                "label": "Tracking Link",
-                "fieldType": "select",
-                "optionsSource": "local",
-                "options": {
-                    "Select": "Select"
-                }
+                "fieldName": "sample_inspection_reports",
+                "label": "Production Sample Inspection Report",
+                "fieldType": "file",
+                "accept": ".pdf",
+                "allowMultiple": true,
+                "width": "w-full"
             }
         ]
     },
@@ -269,13 +350,15 @@
         "fieldgroup": [
             {
                 "fieldName": "project_status",
-                "label": "Project Status",
+                "label": "Order Status",
                 "fieldType": "select",
                 "optionsSource": "local",
                 "options": {
                     "In Progress": "In Progress",
                     "Completed": "Completed"
-                }
+                },
+                "fieldValue": "In Progress",
+                "width": "w-full lg:w-1/2"
             },
             {
                 "fieldName": "status",
@@ -283,9 +366,11 @@
                 "fieldType": "select",
                 "optionsSource": "local",
                 "options": {
-                    "In Progress": "Active",
-                    "Completed": "InActive"
-                }
+                    "Active": "Active",
+                    "InActive": "InActive"
+                },
+                "fieldValue": "Active",
+                "width": "w-full lg:w-1/2"
             }
         ]
     }

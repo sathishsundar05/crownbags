@@ -8,19 +8,23 @@ export default {
       pink: "#ff49db",
       orange: "#ff7849",
       green: "#13ce66",
+      success: "#28a745",
       yellow: "#ffc82c",
+      red: "#D11A2A",
       "gray-dark": "#273444",
       white: "#fff",
-      black: "#000",
+      black: {
+        light: '#efeaf2',
+        DEFAULT: "#000",
+        dark: 'rgb(98, 98, 98)',
+      },
       gray: {
         DEFAULT: "#8492a6",
         50: "rgb(249 250 251)",
         200: "rgb(229 231 235)",
       },
       primary: {
-        DEFAULT: "#1c4622",
-        light: "#398744",
-        dark: "#1c4622",
+        DEFAULT: "#016302",
       },
       secondary: {
         DEFAULT: "#5f6c91",
@@ -34,6 +38,7 @@ export default {
       40: "0.4",
       60: "0.6",
       80: "0.8",
+      85: "0.85",
       100: "1",
     },
     keyframes: {

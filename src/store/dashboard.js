@@ -2,19 +2,20 @@ import { defineStore } from 'pinia'
 import { baseUrl } from "../const/index"
 import axios from "axios";
 
-export const loginStore = defineStore('loginStore', {
+export const dashboardStore = defineStore('dashboardStore', {
   state: () => {
     return {
-      userDetails: null
+      dashboardDetails: {}
     }
   },
   actions: {
-    $doLogin(payload) {
+    $getDashboardDetails() {
         return new Promise((resolve, reject) => {
-            axios.get(`${baseUrl}?gofor=login&username=${payload.username}&password=${payload.password}`).then(response => {
+            axios.get(`${baseUrl}?gofor=dashboard`).then(response => {
+              this.dashboardDetails = response.data;
                 resolve(response.data);
             }).catch(err => {
-                console.log("Error in login", err);
+                console.log("Error getting details", err);
                 reject(err);
             })
         })

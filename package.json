@@ -4,13 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host localhost --port 3000",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "@vuepic/vue-datepicker": "^7.4.1",
     "axios": "^1.6.5",
+    "lodash": "^4.17.21",
+    "notiwind": "^2.0.2",
     "pinia": "^2.1.7",
     "preline": "^2.0.3",
     "radix-vue": "^1.2.6",

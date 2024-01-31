@@ -43,7 +43,7 @@
     </div>
     <div class="flex justify-end">
       <button
-        class="text-sm text-white rounded-lg mt-2 bg-gradient-to-b from-primary-light to-primary-dark px-4 py-2"
+        class="text-sm text-white rounded-lg mt-2 bg-primary px-4 py-2"
         @click="addCourier"
       >
         Save changes
@@ -62,10 +62,12 @@ const status = ref("")
 
 const addCourier = () => {
   let payload = {
+    "gofor": "addcouriers",
     "name": name.value,
     "link": link.value,
     "status": status.value
   };
+
   emit("addCourier", payload);
 };
 

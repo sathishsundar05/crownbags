@@ -11,7 +11,7 @@ export const courierStore = defineStore('courierStore', {
   actions: {
     async $getCouriers() {
         try {
-            const response = await axios.get(`${baseUrl}viewcouriers`);
+            const response = await axios.get(`${baseUrl}?gofor=courierslist`);
             this.couriers = [...response.data];
             return this.couriers;
         } catch (err) {
@@ -21,7 +21,7 @@ export const courierStore = defineStore('courierStore', {
     },
     $addCourier(payload) {
         return new Promise((resolve, reject) => {
-            axios.post(`${baseUrl}addcouriers`, payload).then(response => {
+            axios.post(`${baseUrl}`, payload).then(response => {
                 resolve(response.data);
             }).catch(err => {
                 console.log("Error: ", err);
@@ -40,7 +40,7 @@ export const courierStore = defineStore('courierStore', {
     },
     async $deleteCourier(id) {
         try {
-            const response = axios.post(`${baseUrl}deletecouriers/${id}`);
+            const response = axios.post(`${baseUrl}?gofor=couriersdelete&courier_id=${id}`);
             return response.data;
         } catch (err) {
             console.error("Error: ", err);
