@@ -14,6 +14,7 @@ export const orderStore = defineStore("orderStore", {
         stuffing_photos: [],
         sample_inspection_photos: [],
         sample_inspection_reports: [],
+        customers_po_upload: [],
       },
       userCustomers: [],
       customerOrder: []
@@ -99,10 +100,17 @@ export const orderStore = defineStore("orderStore", {
         const response = await axios.post(`${baseUrl}`, payload);
         if (response.data && response.data.trim().length > 0) {
           if (!this.fileUploadData[payload.gofor].includes(response.data)) {
-            this.fileUploadData[payload.gofor].push({
-              url: response.data,
-              fieldName: payload.gofor,
-            });
+            if(payload.gofor === 'customers_po_upload') {
+              this.fileUploadData[payload.gofor] = [{
+                url: response.data,
+                fieldName: payload.gofor,
+              }];
+            } else {
+              this.fileUploadData[payload.gofor].push({
+                url: response.data,
+                fieldName: payload.gofor,
+              });
+            }
           }
         } else {
           console.log("Error uploading the image");
@@ -121,6 +129,7 @@ export const orderStore = defineStore("orderStore", {
         stuffing_photos: [],
         sample_inspection_photos: [],
         sample_inspection_reports: [],
+        customers_po_upload: [],
       };
     },
   },

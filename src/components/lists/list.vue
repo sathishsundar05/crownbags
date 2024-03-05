@@ -11,6 +11,47 @@
       <span v-else-if="name ==='tracking_link'" class="capitalize font-sans text-[#57658f] text-[16px] font-bold"
         >Sample tracking link:
       </span>
+      <span v-else-if="name ==='on_board_date'" class="capitalize font-sans text-[#57658f] text-[16px] font-bold"
+        >Proposed On Board Date:
+      </span>
+      <span v-else-if="name ==='ETA_transhipment_port_1'" class="capitalize font-sans text-[#57658f] text-[16px] font-bold"
+        >Proposed ETA Transhipment Port-1:
+      </span>
+      <span v-else-if="name ==='actual_eta_transhipment_port_1'" class="capitalize font-sans text-[#57658f] text-[16px] font-bold"
+        >Actual ETA Transhipment Port-1:
+      </span>
+
+      <span v-else-if="name ==='ETD_transhipment_port_1'" class="capitalize font-sans text-[#57658f] text-[16px] font-bold"
+        >Proposed ETD Transhipment Port-1:
+      </span>
+      <span v-else-if="name ==='actual_etd_transhipment_port_1'" class="capitalize font-sans text-[#57658f] text-[16px] font-bold"
+        >Actual ETD Transhipment Port-1:
+      </span>
+      <span v-else-if="name ==='ETA_transhipment_port_2'" class="capitalize font-sans text-[#57658f] text-[16px] font-bold"
+        >Proposed ETA Transhipment Port-2:
+      </span>
+      <span v-else-if="name ==='actual_eta_transhipment_port_2'" class="capitalize font-sans text-[#57658f] text-[16px] font-bold"
+        >Actual ETA Transhipment Port-2:
+      </span>
+      <span v-else-if="name ==='ETD_transhipment_port_2'" class="capitalize font-sans text-[#57658f] text-[16px] font-bold"
+        >Proposed ETD Transhipment Port-2:
+      </span>
+      <span v-else-if="name ==='actual_etd_transhipment_port_2'" class="capitalize font-sans text-[#57658f] text-[16px] font-bold"
+        >Actual ETD Transhipment Port-2:
+      </span>
+      <span v-else-if="name ==='ETA_discharge_port'" class="capitalize font-sans text-[#57658f] text-[16px] font-bold"
+        >Proposed ETA Discharge Port:
+      </span>
+      <span v-else-if="name ==='actual_eta_discharge_port'" class="capitalize font-sans text-[#57658f] text-[16px] font-bold"
+        >Actual ETA Discharge Port:
+      </span>
+      <span v-else-if="name ==='ETA_final_destination'" class="capitalize font-sans text-[#57658f] text-[16px] font-bold"
+        >Proposed ETA Final Destination:
+      </span>
+      <span v-else-if="name ==='actual_eta_final_destination'" class="capitalize font-sans text-[#57658f] text-[16px] font-bold"
+        >Actual ETA Final Destination:
+      </span>
+
       <span v-else class="capitalize font-sans text-[#57658f] text-[16px] font-bold"
         >{{ name.replaceAll("_", " ") }}:
       </span>
@@ -36,6 +77,10 @@
       </span>
       <span v-else-if="name === 'delivery_address'" class="font-smibold ml-2 font-sans">
         {{ deliveryAddress }}
+      </span>
+      <span v-else-if="name === 'customer_po'" class="font-smibold ml-2 font-sans">
+        <template v-if="list === ''">Not Applicable</template>
+        <template v-else><a :href="list" target="_blank" class="text-primary">View Purchase Order</a></template>
       </span>
       <span v-else class="font-smibold font-sans ml-2">
         <template v-if="list === ''">Not Applicable</template>
@@ -168,6 +213,26 @@ const fieldLists = computed(() => {
 const fileFieldLists = computed(() => {
   return pick(ignoredListItems.value, fileTypeFields.value);
 })
+
+const splice = (object, number, number2) => {
+  var newObj = {};
+
+  if (!number2) {
+    number2 = 1;
+  }
+  Object.entries(object).forEach(function([key, item], index) {
+
+    if (index >= number && index - number < number2) {
+      newObj[key] = item
+    }
+  })
+  return newObj;
+}
+
+const firstGroup = () => {
+  returnsplice(fileFieldLists.value, 0, 1);
+  return fileFieldLists.value;
+}
 
 const openDocument = (src) => {
   window.open(src, "_blank");
