@@ -58,7 +58,6 @@
 import { onMounted, ref } from "vue";
 import Navbar from "../components/navbar/navbar.vue";
 import Footer from "../components/footer/footer.vue";
-import Table from "../components/table/table.vue";
 import MaterialTable from "../components/table/MaterialTable.vue";
 import customerForm from "../components/forms/customerForm.vue";
 import {
@@ -68,7 +67,6 @@ import {
   DialogPortal,
   DialogRoot,
   DialogTitle,
-  DialogTrigger,
 } from "radix-vue";
 import { customerStore } from "../store/customers";
 import closeIcon from "../assets/icons/close.vue";

@@ -49,6 +49,16 @@
                       <deleteIcon @click="onDelete(data)" class="text-red cursor-pointer" />
                       <navigateIcon @click="navigateTo(data)"></navigateIcon>
                     </div>
+                    <div
+                      v-else-if="
+                        columnKey === 'complaint_id'
+                      "
+                      class="flex space-x-2"
+                    >
+                      <editIcon @click="onEdit(data)" class="text-primary cursor-pointer" />
+                      <deleteIcon @click="onDelete(data)" class="text-red cursor-pointer" />
+                      <navigateIcon @click="navigateToComplaint(data)"></navigateIcon>
+                    </div>
                     <div v-else-if="columnKey === 'action'" class="flex space-x-2">
                       <button
                         class="text-sm text-white rounded-lg bg-primary px-2 py-1"
@@ -233,7 +243,9 @@ const loadNextItems = () => {
 };
 
 const navigateTo = (data) => {
-  console.log(data?.order_id);
   router.push("/order/view/"+data?.order_id);
+}
+const navigateToComplaint = (data) => {
+  router.push("/complaint/details/"+data?.complaint_id);
 }
 </script>

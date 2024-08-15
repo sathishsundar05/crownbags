@@ -82,6 +82,18 @@
         <template v-if="list === ''">Not Applicable</template>
         <template v-else><a :href="list" target="_blank" class="text-primary">View Purchase Order</a></template>
       </span>
+      <div
+        v-else-if="name === 'defect_photos' || name === 'defect_videos' || name === 'ref_photos' || name === 'ref_videos'"
+        class="border border-black-light w-full mt-3 rounded grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 p-4 place-items-center overflow-x-scroll max-h-[300px] grid-cols-8"
+      >
+        <img
+          v-if="list"
+          :src="list"
+          class="rounded-lg mx-3 cursor-pointer w-20"
+          @click="openDocument(list)"
+        />
+        <div v-else>Not Applicable</div>
+      </div>
       <span v-else class="font-smibold font-sans ml-2">
         <template v-if="list === ''">Not Applicable</template>
         <template v-else>{{ list }}</template>
@@ -118,7 +130,7 @@
         />
         <div v-else>Not Applicable</div>
       </div>
-      </div>
+    </div>
     </div>
   </div>
 </template>

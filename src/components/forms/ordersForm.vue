@@ -1035,8 +1035,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, computed, reactive } from "vue";
-import { get, set } from "lodash";
+import { onMounted, ref, computed } from "vue";
 import Datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import { customerStore } from "../../store/customers";
@@ -1044,7 +1043,6 @@ import { orderStore } from "../../store/orders";
 import { courierStore } from "../../store/courier";
 import documentImage from "@/assets/images/file/document.png";
 import closeIcon from "@/assets/icons/close.vue";
-import { cloneDeep } from "lodash";
 import { getCurrentDateFormatted } from "@/lib/utils";
 
 const emit = defineEmits(["addOrder", "updateOrder"]);
