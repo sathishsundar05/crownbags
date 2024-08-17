@@ -3,129 +3,97 @@
     <!--- Row 1 -->
     <div class="flex flex-col lg:flex-row space-x-0 lg:space-x-6 mb-0 lg:mb-6">
       <div class="mb-6 lg:mb-0 w-full lg:w-1/2">
-        <label for="name" class="block mb-2 text-sm font-medium text-secondary"
-          >PO Number</label
-        >
-        <input
-          v-model="formData.po_number"
+        <label for="name" class="block mb-2 text-sm font-medium text-secondary">PO Number</label>
+        <input v-model="formData.po_number"
           class="shadow-sm bg-white border border-black-light text-secondary focus:outline-none focus:border-primary text-sm rounded-lg block w-full p-2.5"
-          type="text"
-          name="po_number"
-          placeholder="PO Number"
-        />
+          type="text" name="po_number" placeholder="PO Number" />
       </div>
       <div class="mb-6 lg:mb-0 w-full lg:w-1/2">
-        <label for="name" class="block mb-2 text-sm font-medium text-secondary"
-          >Total Quantity</label
-        >
-        <input
-          v-model="formData.total_quantity"
+        <label for="name" class="block mb-2 text-sm font-medium text-secondary">Total Quantity</label>
+        <input v-model="formData.total_quantity"
           class="shadow-sm bg-white border border-black-light text-secondary focus:outline-none focus:border-primary text-sm rounded-lg block w-full p-2.5"
-          type="number"
-          name="total_quantity"
-          placeholder="Total Quantity"
-        />
+          type="number" name="total_quantity" placeholder="Total Quantity" />
       </div>
     </div>
     <!--- Row 2-->
     <div class="flex flex-col lg:flex-row space-x-0 lg:space-x-6 mb-0 lg:mb-6">
       <div class="mb-6 lg:mb-0 w-full lg:w-1/2">
-        <label for="name" class="block mb-2 text-sm font-medium text-secondary"
-          >Defective Quantity</label
-        >
-        <input
-          v-model="formData.defective_quantity"
+        <label for="name" class="block mb-2 text-sm font-medium text-secondary">Defective Quantity</label>
+        <input v-model="formData.defective_quantity"
           class="shadow-sm bg-white border border-black-light text-secondary focus:outline-none focus:border-primary text-sm rounded-lg block w-full p-2.5"
-          type="number"
-          name="defective_quantity"
-          placeholder="Defective Quantity"
-        />
+          type="number" name="defective_quantity" placeholder="Defective Quantity" />
       </div>
 
       <div class="mb-6 lg:mb-0 w-full lg:w-1/2">
         <label for="name" class="block mb-2 text-sm font-medium text-secondary">
           Definition of Defect
         </label>
-        <textarea
-          v-model="formData.def_of_defect"
+        <textarea v-model="formData.def_of_defect"
           class="shadow-sm bg-white border border-black-light text-secondary focus:outline-none focus:border-primary text-sm rounded-lg block w-full p-2.5"
-          rows="3"
-          name="def_of_defect"
-          placeholder="Definition of Defect"
-        ></textarea>
+          rows="3" name="def_of_defect" placeholder="Definition of Defect"></textarea>
       </div>
     </div>
 
     <!--- Row 3-->
     <div class="flex flex-col lg:flex-row space-x-0 lg:space-x-6 mb-0 lg:mb-6">
       <div class="mb-6 lg:mb-0 w-full lg:w-1/2">
-        <label for="name" class="block mb-2 text-sm font-medium text-secondary"
-          >Defect Photos</label
-        >
+        <label for="name" class="block mb-2 text-sm font-medium text-secondary">Defect Photos</label>
         <input
           class="block text-secondary w-full text-sm text-gray-900 border border-black-light rounded-lg cursor-pointer bg-white"
-          type="file"
-          accept="image/*"
-          @change="updateFormData($event, 'defect_photos')"
-        />
+          type="file" accept="image/*" @change="updateFormData($event, 'defect_photos')" multiple />
 
-        <div
-          v-if="showFilePreview('defect_photos')"
-          class="border border-black-light w-full mt-3 rounded grid gap-3 p-4 place-items-center overflow-x-scroll max-h-[300px] grid-cols-6"
-        >
-          <div
-            v-for="(fileSrc, index) in cStore.fileUploadData[
-              'defect_photos'
-            ]"
-            :key="index"
-            class="relative group"
-          >
-            <img
-              :src="fileSrc.url"
-              class="rounded-lg mx-3 w-20"
-              @click="openDocument(fileSrc.url)"
-            />
+        <div v-if="showFilePreview('defect_photos')"
+          class="border border-black-light w-full mt-3 rounded grid gap-3 p-4 place-items-center overflow-x-scroll max-h-[300px]"
+          :class="isDocument.includes('defect_photos')
+            ? 'grid-cols-8'
+            : 'grid-cols-6'
+            ">
+          <div v-for="(fileSrc, index) in cStore.fileUploadData[
+            'defect_photos'
+          ]" :key="index" class="relative group">
+            <img :src="isDocument.includes('defect_photos')
+              ? documentImage
+              : fileSrc.url
+              " class="rounded-lg mx-3" :class="isDocument.includes('defect_photos')
+                ? 'w-20'
+                : 'object-cover w-32 h-32'
+                " @click="openDocument(fileSrc.url)" />
             <span
               class="hidden group-hover:block group-hover:shadow-lg cursor-pointer bg-gray-200 rounded-full absolute top-2 right-4 close-icon"
-              @click="removeFile('defect_photos', index)"
-              ><closeIcon
-            /></span>
+              @click="removeFile('defect_photos', index)">
+              <closeIcon />
+            </span>
           </div>
         </div>
       </div>
 
       <div class="mb-6 lg:mb-0 w-full lg:w-1/2" v-if="userType === 'A'">
-        <label for="name" class="block mb-2 text-sm font-medium text-secondary"
-          >Reference Images</label
-        >
+        <label for="name" class="block mb-2 text-sm font-medium text-secondary">Reference Images</label>
         <input
           class="block text-secondary w-full text-sm text-gray-900 border border-black-light rounded-lg cursor-pointer bg-white"
-          type="file"
-          accept="image/*"
-          @change="updateFormData($event, 'ref_photos')"
-        />
-        
-        <div
-          v-if="showFilePreview('ref_photos')"
-          class="border border-black-light w-full mt-3 rounded grid gap-3 p-4 place-items-center overflow-x-scroll max-h-[300px] grid-cols-8"
-        >
-          <div
-            v-for="(fileSrc, index) in cStore.fileUploadData[
-              'ref_photos'
-            ]"
-            :key="index"
-            class="relative group"
-          >
-            <img
-              :src="fileSrc.url"
-              class="rounded-lg mx-3 w-20"
-              @click="openDocument(fileSrc.url)"
-            />
+          type="file" accept="image/*" @change="updateFormData($event, 'ref_photos')" multiple />
+
+        <div v-if="showFilePreview('ref_photos')"
+          class="border border-black-light w-full mt-3 rounded grid gap-3 p-4 place-items-center overflow-x-scroll max-h-[300px]"
+          :class="isDocument.includes('ref_photos')
+            ? 'grid-cols-8'
+            : 'grid-cols-6'
+            ">
+          <div v-for="(fileSrc, index) in cStore.fileUploadData[
+            'ref_photos'
+          ]" :key="index" class="relative group">
+            <img :src="isDocument.includes('ref_photos')
+              ? documentImage
+              : fileSrc.url
+              " class="rounded-lg mx-3" :class="isDocument.includes('ref_photos')
+                ? 'w-20'
+                : 'object-cover w-32 h-32'
+                " @click="openDocument(fileSrc.url)" />
             <span
               class="hidden group-hover:block group-hover:shadow-lg cursor-pointer bg-gray-200 rounded-full absolute top-2 right-4 close-icon"
-              @click="removeFile('ref_photos', index)"
-              ><closeIcon
-            /></span>
+              @click="removeFile('ref_photos', index)">
+              <closeIcon />
+            </span>
           </div>
         </div>
       </div>
@@ -214,127 +182,71 @@
         <label for="name" class="block mb-2 text-sm font-medium text-secondary">
           Add Root Cause Analysis
         </label>
-        <textarea
-          v-model="formData.rca"
+        <textarea v-model="formData.rca"
           class="shadow-sm bg-white border border-black-light text-secondary focus:outline-none focus:border-primary text-sm rounded-lg block w-full p-2.5"
-          rows="3"
-          name="rca"
-          placeholder="Add Root Cause Analysis"
-        ></textarea>
+          rows="3" name="rca" placeholder="Add Root Cause Analysis"></textarea>
       </div>
-      
+
       <div class="mb-6 lg:mb-0 w-full lg:w-1/2">
         <label for="name" class="block mb-2 text-sm font-medium text-secondary">
           Add Corrective Action
         </label>
-        <textarea
-          v-model="formData.corrective_action"
+        <textarea v-model="formData.corrective_action"
           class="shadow-sm bg-white border border-black-light text-secondary focus:outline-none focus:border-primary text-sm rounded-lg block w-full p-2.5"
-          rows="3"
-          name="corrective_action"
-          placeholder="Add Corrective Action"
-        ></textarea>
+          rows="3" name="corrective_action" placeholder="Add Corrective Action"></textarea>
       </div>
     </div>
 
     <!--- Row 6-->
     <div class="flex flex-col lg:flex-row space-x-0 lg:space-x-6 mb-0 lg:mb-6" v-if="userType === 'A'">
       <div class="mb-6 lg:mb-0 w-full lg:w-1/2">
-        <label for="name" class="block mb-2 text-sm font-medium text-secondary"
-          >Complaint Research Team</label
-        >
-        <input
-          v-model="formData.crteam"
+        <label for="name" class="block mb-2 text-sm font-medium text-secondary">Complaint Research Team</label>
+        <input v-model="formData.crteam"
           class="shadow-sm bg-white border border-black-light text-secondary focus:outline-none focus:border-primary text-sm rounded-lg block w-full p-2.5"
-          type="text"
-          name="crteam"
-          placeholder="Complaint Research Team"
-        />
+          type="text" name="crteam" placeholder="Complaint Research Team" />
       </div>
 
       <div class="mb-6 lg:mb-0 w-full lg:w-1/2">
-        <label for="name" class="block mb-2 text-sm font-medium text-secondary"
-          >Prepared by</label
-        >
-        <input
-          v-model="formData.prepared_by"
+        <label for="name" class="block mb-2 text-sm font-medium text-secondary">Prepared by</label>
+        <input v-model="formData.prepared_by"
           class="shadow-sm bg-white border border-black-light text-secondary focus:outline-none focus:border-primary text-sm rounded-lg block w-full p-2.5"
-          type="text"
-          name="prepared_by"
-          placeholder="Prepared by"
-        />
+          type="text" name="prepared_by" placeholder="Prepared by" />
       </div>
     </div>
 
     <!--- Row 7-->
     <div class="flex flex-col lg:flex-row space-x-0 lg:space-x-6 mb-0 lg:mb-6" v-if="userType === 'A'">
       <div class="mb-6 lg:mb-0 w-full lg:w-1/2">
-        <label for="name" class="block mb-2 text-sm font-medium text-secondary"
-          >Start Date</label
-        >
-        <Datepicker
-          v-model="formData.start_date"
-          type="date"
-          :name="start_date"
-          placeholder="Start Date"
-          :preview-format="format"
-          :format="format"
-          :enable-time-picker="false"
-          auto-apply
-        />
+        <label for="name" class="block mb-2 text-sm font-medium text-secondary">Start Date</label>
+        <Datepicker v-model="formData.start_date" type="date" :name="start_date" placeholder="Start Date"
+          :preview-format="format" :format="format" :enable-time-picker="false" auto-apply />
       </div>
 
       <div class="mb-6 lg:mb-0 w-full lg:w-1/2">
-        <label for="name" class="block mb-2 text-sm font-medium text-secondary"
-          >End Date</label
-        >
-        <Datepicker
-          v-model="formData.end_date"
-          type="date"
-          :name="end_date"
-          placeholder="End Date"
-          :preview-format="format"
-          :format="format"
-          :enable-time-picker="false"
-          auto-apply
-        />
+        <label for="name" class="block mb-2 text-sm font-medium text-secondary">End Date</label>
+        <Datepicker v-model="formData.end_date" type="date" :name="end_date" placeholder="End Date"
+          :preview-format="format" :format="format" :enable-time-picker="false" auto-apply />
       </div>
     </div>
 
     <!--- Row 8-->
-    <div class="flex flex-col lg:flex-row space-x-0 lg:space-x-6 mb-0 lg:mb-6">
+    <div class="flex flex-col lg:flex-row space-x-0 lg:space-x-6 mb-0 lg:mb-6" v-if="userType === 'A'">
       <div class="mb-6 lg:mb-0 w-full lg:w-1/2">
-        <label for="name" class="block mb-2 text-sm font-medium text-secondary"
-          >Complaint Status</label
-        >
+        <label for="name" class="block mb-2 text-sm font-medium text-secondary">Complaint Status</label>
         <select
           class="shadow-sm bg-white border border-black-light text-secondary focus:outline-none focus:border-primary text-sm rounded-lg block w-full p-2.5"
-          name="comp_status"
-          v-model="formData.comp_status"
-        >
-          <option
-            v-for="(option, indexOption) in complaintStatusOptions"
-            :key="indexOption"
-            :value="option"
-          >
+          name="comp_status" v-model="formData.comp_status">
+          <option v-for="(option, indexOption) in complaintStatusOptions" :key="indexOption" :value="option">
             {{ option }}
           </option>
         </select>
       </div>
-      <div class="mb-6 lg:mb-0 w-full lg:w-1/2" v-if="userType === 'A'">
-        <label for="name" class="block mb-2 text-sm font-medium text-secondary"
-          >Customer Name</label
-        >
+      <div class="mb-6 lg:mb-0 w-full lg:w-1/2">
+        <label for="name" class="block mb-2 text-sm font-medium text-secondary">Customer Name</label>
         <select
           class="shadow-sm bg-white border border-black-light text-secondary focus:outline-none focus:border-primary text-sm rounded-lg block w-full p-2.5"
-          name="customer_id"
-          v-model="formData.customer_id"
-        >
-          <option
-            v-for="(option, indexOption) in customersList"
-            :key="indexOption"
-            :value="option.key"
-          >
+          name="customer_id" v-model="formData.customer_id">
+          <option v-for="(option, indexOption) in customersList" :key="indexOption" :value="option.key">
             {{ option.value }}
           </option>
         </select>
@@ -342,10 +254,7 @@
     </div>
 
     <div class="flex justify-end pt-4">
-      <button
-        class="text-sm text-white rounded-lg bg-primary px-4 py-2"
-        @click="addComplaint"
-      >
+      <button class="text-sm text-white rounded-lg bg-primary px-4 py-2" @click="addComplaint">
         Submit
       </button>
     </div>
@@ -360,6 +269,7 @@ import { complaintStore } from "../../store/complaint";
 import { customerStore } from "../../store/customers";
 import { getCurrentDateFormatted } from "@/lib/utils";
 import documentImage from "@/assets/images/file/document.png";
+import closeIcon from "@/assets/icons/close.vue";
 
 const userDetails = localStorage.getItem('userDetails');
 const userType = userDetails ? JSON.parse(userDetails).type : null;
@@ -372,10 +282,12 @@ const csStore = customerStore();
 
 const formData = ref({});
 const complaintStatusOptions = ref({
-  Active: "In Progress",
-  InActive: "Completed",
+  "Complaint Raised": "Complaint Raised",
+  "In Progress": "In Progress",
+  "Completed": "Completed",
 });
 const customersList = ref([]);
+const isDocument = ref([]);
 
 const addComplaint = (e) => {
   e.preventDefault();
@@ -418,18 +330,18 @@ const addComplaint = (e) => {
 onMounted(async () => {
   if (props.prefillData) {
     formData.value.po_number = props.prefillData.po_number,
-    formData.value.total_quantity= props.prefillData.total_quantity,
-    formData.value.defective_quantity= props.prefillData.defective_quantity,
-    formData.value.def_of_defect= props.prefillData.def_of_defect,
-    formData.value.rca= props.prefillData.rca,
-    formData.value.corrective_action= props.prefillData.corrective_action,
-    formData.value.crteam= props.prefillData.crteam,
-    formData.value.start_date= props.prefillData.start_date,
-    formData.value.end_date= props.prefillData.end_date,
-    formData.value.prepared_by= props.prefillData.prepared_by,
-    formData.value.comp_status= props.prefillData.comp_status,
-    formData.value.customer_id= props.prefillData.customer_id;
-      
+      formData.value.total_quantity = props.prefillData.total_quantity,
+      formData.value.defective_quantity = props.prefillData.defective_quantity,
+      formData.value.def_of_defect = props.prefillData.def_of_defect,
+      formData.value.rca = props.prefillData.rca,
+      formData.value.corrective_action = props.prefillData.corrective_action,
+      formData.value.crteam = props.prefillData.crteam,
+      formData.value.start_date = props.prefillData.start_date,
+      formData.value.end_date = props.prefillData.end_date,
+      formData.value.prepared_by = props.prefillData.prepared_by,
+      formData.value.comp_status = props.prefillData.comp_status,
+      formData.value.customer_id = props.prefillData.customer_id;
+
     if (props.prefillData.defect_photos) {
       const fipurls = props.prefillData.defect_photos?.split(",");
       const fip = fipurls?.map(function (url) {
@@ -460,10 +372,10 @@ onMounted(async () => {
     }
   } else {
     cStore.$resetFileData();
-    formData.value.comp_status = 'In Progress'
+    formData.value.comp_status = 'Complaint Raised'
   }
 
-  if(userType === 'A') {
+  if (userType === 'A') {
     getCustomers();
   }
 });
@@ -549,6 +461,7 @@ form {
     font-size: 14px;
     border-radius: 8px !important;
   }
+
   :deep(.dp__input_wrap .dp__input_focus) {
     border-color: #016302 !important;
   }

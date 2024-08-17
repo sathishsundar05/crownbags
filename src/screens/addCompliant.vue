@@ -6,9 +6,9 @@
       <div class="px-3 lg:px-32 py-6">
         <div class="flex justify-between pt-8 pb-3">
           <h3 class="text-xl font-semibold text-secondary">Add Compliant</h3>
-          <router-link to="/order">
+          <router-link to="/complaint">
           <button
-            class="text-sm text-white rounded-lg bg-gradient-to-b from-primary-light to-primary-dark px-4 py-2"
+            class="text-sm text-white rounded-lg bg-primary px-4 py-2 w-30"
           >
             Back
           </button>

@@ -3,88 +3,62 @@
     <div class="flex flex-col">
       <div class="overflow-x-auto sm:-mx-6">
         <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-6">
-          <div
-            class="overflow-hidden border border-gray-200 md:rounded-lg bg-white"
-          >
+          <div class="overflow-hidden border border-gray-200 md:rounded-lg bg-white">
             <table class="min-w-full divide-y divide-gray-200">
               <thead class="bg-gray-50">
                 <tr>
-                  <th
-                    scope="col"
-                    class="py-3.5 px-4 text-sm font-semibold text-left rtl:text-right text-secondary"
-                    v-for="(header, index) in tableHeader"
-                    :key="index"
-                  >
+                  <th scope="col" class="py-3.5 px-4 text-sm font-semibold text-left rtl:text-right text-secondary"
+                    v-for="(header, index) in tableHeader" :key="index">
                     {{ header }}
                   </th>
                 </tr>
               </thead>
               <tbody class="bg-white divide-y divide-gray-200 text-secondary">
-                <tr
-                  v-for="(data, tableIndex) in filteredTableData()"
-                  :key="tableIndex"
-                >
-                  <td
-                    class="py-3.5 px-4 text-sm text-left rtl:text-right text-secondary font-light whitespace-nowrap"
-                    v-for="(columnValue, columnKey, colIndex) in data"
-                    :key="colIndex"
-                  >
-                    <div
-                      v-if="
-                        columnKey === 'customer_id' ||
-                        columnKey === 'courier_id'
-                      "
-                      class="flex space-x-2"
-                    >
+                <tr v-for="(data, tableIndex) in filteredTableData()" :key="tableIndex">
+                  <td class="py-3.5 px-4 text-sm text-left rtl:text-right text-secondary font-light whitespace-nowrap"
+                    v-for="(columnValue, columnKey, colIndex) in data" :key="colIndex">
+                    <div v-if="
+                      columnKey === 'customer_id' ||
+                      columnKey === 'courier_id'
+                    " class="flex space-x-2">
                       <editIcon @click="onEdit(data)" class="text-primary cursor-pointer" />
                       <deleteIcon @click="onDelete(data)" class="text-red cursor-pointer" />
                     </div>
-                    <div
-                      v-else-if="
-                        columnKey === 'order_id'
-                      "
-                      class="flex space-x-2"
-                    >
+                    <div v-else-if="
+                      columnKey === 'order_id'
+                    " class="flex space-x-2">
                       <editIcon @click="onEdit(data)" class="text-primary cursor-pointer" />
                       <deleteIcon @click="onDelete(data)" class="text-red cursor-pointer" />
                       <navigateIcon @click="navigateTo(data)"></navigateIcon>
                     </div>
-                    <div
-                      v-else-if="
-                        columnKey === 'complaint_id'
-                      "
-                      class="flex space-x-2"
-                    >
-                      <editIcon @click="onEdit(data)" class="text-primary cursor-pointer" />
+                    <div v-else-if="
+                      columnKey === 'complaint_status'
+                    " class="flex space-x-2">
+                      <editIcon @click="onEdit(data)" class="text-primary cursor-pointer" 
+                      :class="userType === 'C' && data.project_status !== 'Complaint Raised' ? 'pointer-events-none' : ''" />
                       <deleteIcon @click="onDelete(data)" class="text-red cursor-pointer" />
                       <navigateIcon @click="navigateToComplaint(data)"></navigateIcon>
                     </div>
                     <div v-else-if="columnKey === 'action'" class="flex space-x-2">
-                      <button
-                        class="text-sm text-white rounded-lg bg-primary px-2 py-1"
-                        @click="onviewDetails(data)"
-                      >
+                      <button class="text-sm text-white rounded-lg bg-primary px-2 py-1" @click="onviewDetails(data)">
                         View
                       </button>
                     </div>
                     <div v-else-if="columnKey === 'project_status'">
-                      <span
-                        v-if="columnValue === 'Completed'"
-                        class="border border-[green] rounded-2xl text-[green] px-4 py-1 font-smibold"
-                      >
+                      <span v-if="columnValue === 'Complaint Raised'"
+                        class="border border-[grey] rounded-2xl text-[grey] px-4 py-1">
                         {{ columnValue }}
                       </span>
-                      <span
-                        v-if="columnValue === 'In Progress'"
-                        class="border border-[orange] rounded-2xl text-[orange] px-4 py-1 font-smibold"
-                      >
+                      <span v-if="columnValue === 'Completed'"
+                        class="border border-[green] rounded-2xl text-[green] px-4 py-1">
+                        {{ columnValue }}
+                      </span>
+                      <span v-if="columnValue === 'In Progress'"
+                        class="border border-[orange] rounded-2xl text-[orange] px-4 py-1">
                         {{ columnValue }}
                       </span>
                     </div>
-                    <div
-                      class="flex items-center"
-                      v-else-if="columnKey !== 'status'"
-                    >
+                    <div class="flex items-center" v-else-if="columnKey !== 'status'">
                       <div>
                         <p class="text-secondary whitespace-no-wrap">
                           {{ columnValue }}
@@ -103,31 +77,17 @@
     <div class="mt-6 sm:flex sm:items-center sm:justify-between">
       <div class="text-sm text-secondary font-medium">
         Showing
-        <span class="font-medium text-gray-700"
-          >{{ itemFrom() + 1 }} - {{ itemTo() }} of {{ tableData.length }}</span
-        >
+        <span class="font-medium text-gray-700">{{ itemFrom() + 1 }} - {{ itemTo() }} of {{ tableData.length }}</span>
       </div>
 
       <div class="flex items-center mt-4 gap-x-4 sm:mt-0">
         <button
           class="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-secondary capitalize transition-colors duration-200 border rounded-md sm:w-auto gap-x-2"
-          @click="loadPrevItems"
-          :disabled="diablePrev"
-          :class="diablePrev ? 'bg-gray-200' : 'bg-white hover:bg-gray-50'"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-5 h-5 rtl:-scale-x-100"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
-            />
+          @click="loadPrevItems" :disabled="diablePrev"
+          :class="diablePrev ? 'bg-gray-200' : 'bg-white hover:bg-gray-50'">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-5 h-5 rtl:-scale-x-100">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
           </svg>
 
           <span> previous </span>
@@ -135,25 +95,13 @@
 
         <button
           class="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-secondary capitalize transition-colors duration-200 border rounded-md sm:w-auto gap-x-2"
-          @click="loadNextItems"
-          :disabled="diableNext"
-          :class="diableNext ? 'bg-gray-200' : 'bg-white hover:bg-gray-50'"
-        >
+          @click="loadNextItems" :disabled="diableNext"
+          :class="diableNext ? 'bg-gray-200' : 'bg-white hover:bg-gray-50'">
           <span> Next </span>
 
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-5 h-5 rtl:-scale-x-100"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-            />
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-5 h-5 rtl:-scale-x-100">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
           </svg>
         </button>
       </div>
@@ -175,6 +123,9 @@ const currentPage = ref(0);
 const itemsPerPage = ref(10);
 const searchedText = ref("");
 
+const userDetails = localStorage.getItem('userDetails');
+const userType = userDetails ? JSON.parse(userDetails).type : null;
+
 const router = useRouter();
 
 const onEdit = (val) => {
@@ -182,7 +133,7 @@ const onEdit = (val) => {
 };
 
 const onDelete = (val) => {
-  emit("delete", val.customer_id || val.order_id || val.courier_id);
+  emit("delete", val.customer_id || val.order_id || val.courier_id || val.complaint_no );
 };
 
 const onviewDetails = (val) => {
@@ -243,9 +194,9 @@ const loadNextItems = () => {
 };
 
 const navigateTo = (data) => {
-  router.push("/order/view/"+data?.order_id);
+  router.push("/order/view/" + data?.order_id);
 }
 const navigateToComplaint = (data) => {
-  router.push("/complaint/details/"+data?.complaint_id);
+  router.push("/complaint/details/" + data?.complaint_no.split('CCR-')[1]);
 }
 </script>
